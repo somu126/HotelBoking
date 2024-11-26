@@ -1,6 +1,9 @@
-FROM maven:3.8.5-openjdk-17 AS build
-COPY . .
-RUN mvn clean package -DskipTests -X
+FROM maven:3.8.8-eclipse-temurin-17
+WORKDIR /app
+COPY . /app
+RUN ls -la
+RUN mvn clean package -DskipTests
+
 
 FROM openjdk:17.0.1-jdk-slim
 COPY --from=build /target/Boking-0.0.1-SNAPSHOT.jar Boking.jar
